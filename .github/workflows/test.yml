@@ -1,0 +1,39 @@
+name: Test scripts
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-espressif-s3:
+    runs-on: ubuntu-latest
+    container: ghcr.io/zephyrproject-rtos/ci-base:main
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq curl
+
+      - name: Test script
+        run: |
+          bash init.sh espressif-s3 zephyr-workspace
+
+  test-espressif-st-stm32:
+    runs-on: ubuntu-latest
+    container: ghcr.io/zephyrproject-rtos/ci-base:main
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq curl
+
+      - name: Test script
+        run: |
+          bash init.sh st-stm32 zephyr-workspace
+
